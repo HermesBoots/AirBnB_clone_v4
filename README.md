@@ -218,6 +218,7 @@ github repo
 * Carrie Ybay, [hicarrie](https://github.com/hicarrie) | [@hicarrie_](https://twitter.com/hicarrie_)
 * Jared Heck, [jarehec](https://github.com/jarehec) | [@jarehec](https://twitter.com/jarehec)
 * Sam Hermes, [HermesBoots](https://github.com/hermesboots) | [@SamHermesBoots](https://twitter.com/samhermesboots)
+* Jonathan Vasquexz, [jxvo](https://github.com/jxvo) | [@jxvoxo](https://twitter.com/jxvoxo)
 
 ## License
 
