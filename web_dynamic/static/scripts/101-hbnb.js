@@ -1,3 +1,21 @@
+let monthNames = [
+  'January', 'February', 'March', 'April', 'May', 'June',
+  'July', 'August', 'September', 'October', 'November', 'December'
+];
+
+function numSuffix (num) {
+  switch (num % 10) {
+    case 3:
+      return 'rd';
+    case 2:
+      return 'nd';
+    case 1:
+      return 'st';
+    default:
+      return 'th';
+  }
+}
+
 function showPlace (place) {
   const article = $(`
     <article data-id="${place.id}">
@@ -34,10 +52,18 @@ function showPlace (place) {
 function showReview (review, place) {
   const elem = $(`
     <li>
-      <h3>From the ${review.date}</h3>
+      <h3>From ${userName} the ${date} ${month} ${year}</h3>
       <p>${review.text}</p>
     </li>
   `);
+  let dateObj = new Date(review.updated_at);
+  let userId = review.user_id;
+  let date = dateObj.getDate() + numSuffix(dateObj.getDate());
+  let month = monthNames[dateObj.getMonth()];
+  let year = dateObj.getYear();
+  $.get(`//localhost:5001/api/v1/users/${userId}`, function (body) {
+    let userName = user.first_name + user.last_name;
+  });
   place.find('.reviews').append(elem);
 }
 
@@ -85,15 +111,16 @@ $(function () {
   $('body').on('click', '.reviews>span', function () {
     const place = $(this).closest('article');
     const placeId = place[0].dataset.id;
-    if ($(this).text() === "show") {
+    const spanTxt = $(this).text();
+    if (spanTxt === "show") {
       $.get(`//localhost:5001/api/v1/places/${placeId}/reviews`, function (body) {
         body = body.sort((left, right) => -left.created_at.localeCompare(right.created_at));
         for (const review in body) { showReview(review, place); }
         $(this).text("hide");
       });
-    } else if ($(this).text() === "show") {
+    } else if (spanTxt === "hide") {
       $('.reviews>li').hide();
-      $(this).text("hide");
+      $(this).text("show");
     }
   });
 
